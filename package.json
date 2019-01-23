@@ -1,0 +1,36 @@
+{
+  "name": "js-dataform",
+  "version": "1.0.0",
+  "description": "Adds javascript support to compose object by deep form structure. The method dataform() uses javascript to serializes a form into a JavaScript Object. With this library you can also specific types to mutate data, appending the type with a colon.",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "echo ERR! Not implement yet...",
+    "prepublishOnly": "npm run build",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maviniciuus/js-dataform.git"
+  },
+  "keywords": [
+    "dataform",
+    "data-form",
+    "parser",
+    "form-parser",
+    "form-to-json"
+  ],
+  "author": "Marcus Vinícius Mendes Gonçalves <maviniciuus@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maviniciuus/js-dataform/issues"
+  },
+  "homepage": "https://github.com/maviniciuus/js-dataform#readme",
+  "devDependencies": {
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
+  }
+}

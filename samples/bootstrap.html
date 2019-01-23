@@ -1,0 +1,202 @@
+<html>
+  <head>
+    <title>DATAFORM</title>
+    <script type="text/javascript" src="../dist/jsdataform.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body style="padding:10px;background-color:#ccc;">
+    <div class="card">
+      <div class="card-header">FORM</div>
+      <div class="card-body">
+        <h5 class="card-title">Dataform bootstrap sample:</h5>
+        <form id="form">
+          <h6>System</h6>
+          <hr />
+          <div class="form-group row">
+            <div class="form-group col-md-2">
+              <label for="codigo:int">CODIGO</label>
+              <input
+                type="number"
+                name="codigo:int"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group col-md-6">
+              <legend class="col-form-label pt-0">ROLES</legend>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  name="profile[roles][admin]"
+                />
+                <label class="form-check-label">ADMIN</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  name="profile[roles][standard]"
+                />
+                <label class="form-check-label">STANDARD</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  name="profile[roles][guest]"
+                />
+                <label class="form-check-label">GUEST</label>
+              </div>
+            </div>
+          </div>
+
+          <h6>Profile</h6>
+          <hr />
+          <div class="form-group row">
+            <div class="form-group col-md-5">
+              <label for="profile[name]:string">NAME</label>
+              <input
+                name="profile[name]:string"
+                value="FULANO"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="profile[phone]:str">PHONE</label>
+              <input
+                name="profile[phone]:str"
+                value="12345-1234"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group col-md-3">
+              <label for="profile[age]:integer">AGE</label>
+              <input
+                name="profile[age]:integer"
+                value="28"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group col-md-3">
+              <legend class="col-form-label pt-0">GENDER</legend>
+              <input
+                type="radio"
+                name="profile[gender]"
+                value="other"
+                checked
+              />
+              Other
+              <input type="radio" name="profile[gender]" value="male" /> Male
+              <input type="radio" name="profile[gender]" value="female" />
+              Female
+            </div>
+            <div class="form-group col-md-12">
+              <label for="profile[colors]">COLORS</label>
+              <select
+                multiple
+                name="profile[colors][]"
+                class="form-control"
+                required
+              >
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+                <option value="yellow">Yellow</option>
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="tags:comma_split">TAGS</label>
+              <textarea name="tags:comma_split" class="form-control">
+      tag1,tag2,tag3,tag4,tag5</textarea
+              >
+            </div>
+            <div class="form-group col-md-12"></div>
+            <div class="form-group col-md-12">
+              <label for="options:object">OPTIONS</label>
+              <textarea name="options:object" class="form-control">
+              {"openMenu": false, "openUser": true}</textarea
+              >
+            </div>
+          </div>
+          <fieldset>
+            <h6>Contact</h6>
+            <p>
+              <label for="profile[contact][][name]">NAME</label>
+              <input
+                name="profile[contact][][name]"
+                value="Fulano da Silva"
+                class="form-control"
+              />
+              <label for="profile[contact][][email]">EMAIL</label>
+              <input
+                name="profile[contact][][email]"
+                value="fulano@email.com"
+                class="form-control"
+              />
+              <label for="profile[contact][][phone]">PHONE</label>
+              <input
+                name="profile[contact][][phone]"
+                value="12345-1234"
+                class="form-control"
+              />
+              <br />
+              <button
+                onclick="remove_contact(event);"
+                class="btn btn-info btn-small"
+              >
+                -
+              </button>
+              <button
+                onclick="append_contact(event);"
+                class="btn  btn-info btn-small"
+              >
+                +
+              </button>
+            </p>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">DATAFORM</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    //handle submit, parse and print data at console
+    function handle_submit(event) {
+      event.preventDefault();
+      console.log(dataform.parse(event.target));
+    }
+
+    //btn add contact, array field sample
+    function append_contact(event) {
+      event.preventDefault();
+
+      var parent_p = dataform.find_closets(event.target, "p");
+      var contact_container = dataform.find_closets(parent_p, "fieldset");
+      contact_container.appendChild(parent_p.cloneNode(true));
+    }
+
+    //btn remove contact, array field sample
+    function remove_contact(event) {
+      event.preventDefault();
+
+      var parent_p = dataform.find_closets(event.target, "p");
+      var contact_container = dataform.find_closets(parent_p, "fieldset");
+      if (contact_container.childElementCount > 2) {
+        contact_container.removeChild(parent_p);
+      }
+    }
+
+    //submit listener
+    dataform.find_id("form").addEventListener("submit", handle_submit);
+  </script>
+</html>

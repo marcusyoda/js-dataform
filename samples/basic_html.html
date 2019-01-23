@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <title>DATAFORM</title>
+    <script type="text/javascript" src="../dist/jsdataform.min.js"></script>
+  </head>
+  <body>
+    <form id="form">
+      <fieldset>
+        <legend>System</legend>
+        <p>
+          <label for="codigo:int">CODIGO</label><br />
+          <input name="codigo:int" value="1" />
+        </p>
+        <p>
+          <label for="profile[roles]">ROLES</label><br />
+          <input type="checkbox" name="profile[roles][admin]" /> ADMIN
+          <input type="checkbox" name="profile[roles][standard]" /> STANDARD
+          <input type="checkbox" name="profile[roles][guest]" /> GUEST
+        </p>
+        <p>
+          <label for="tags:comma_split">TAGS</label><br />
+          <textarea name="tags:comma_split">tag1,tag2,tag3,tag4,tag5</textarea>
+        </p>
+        <p>
+          <label for="options:object">OPTIONS</label><br />
+          <textarea name="options:object">
+	{"openMenu": false, "openUser": true}</textarea
+          >
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>Profile</legend>
+        <p>
+          <label for="profile[name]:string">NAME</label><br />
+          <input name="profile[name]:string" value="FULANO" />
+        </p>
+        <p>
+          <input type="radio" name="profile[gender]" value="other" checked />
+          Other
+          <input type="radio" name="profile[gender]" value="male" /> Male<br />
+          <input type="radio" name="profile[gender]" value="female" />
+          Female<br />
+        </p>
+        <p>
+          <label for="profile[phone]:str">PHONE</label><br />
+          <input name="profile[phone]:str" value="12345-1234" />
+        </p>
+        <p>
+          <label for="profile[age]:integer">AGE</label><br />
+          <input name="profile[age]:integer" value="28" />
+        </p>
+        <p>
+          <select multiple name="profile[colors][]">
+            <option value="blue">Blue</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+          </select>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>Contact</legend>
+        <p>
+          <label for="profile[contact][][name]">NAME</label>
+          <input name="profile[contact][][name]" value="Fulano da Silva" />
+          <label for="profile[contact][][email]">EMAIL</label>
+          <input name="profile[contact][][email]" value="fulano@email.com" />
+          <label for="profile[contact][][phone]">PHONE</label>
+          <input name="profile[contact][][phone]" value="12345-1234" />
+          <button onclick="remove_contact(event);">-</button>
+          <button onclick="append_contact(event);">+</button>
+        </p>
+      </fieldset>
+      <br />
+      <button type="submit">DATAFORM</button>
+    </form>
+  </body>
+  <script>
+    //handle submit, parse and print data at console
+    function handle_submit(event) {
+      event.preventDefault();
+      console.log(dataform.parse(event.target));
+    }
+
+    //btn add contact, array field sample
+    function append_contact(event) {
+      event.preventDefault();
+
+      var parent_p = dataform.find_closets(event.target, "p");
+      var contact_container = dataform.find_closets(parent_p, "fieldset");
+      contact_container.appendChild(parent_p.cloneNode(true));
+    }
+
+    //btn remove contact, array field sample
+    function remove_contact(event) {
+      event.preventDefault();
+
+      var parent_p = dataform.find_closets(event.target, "p");
+      var contact_container = dataform.find_closets(parent_p, "fieldset");
+      if (contact_container.childElementCount > 2) {
+        contact_container.removeChild(parent_p);
+      }
+    }
+
+    //submit listener
+    dataform.find_id("form").addEventListener("submit", handle_submit);
+  </script>
+</html>
