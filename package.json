@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/maviniciuus/js-dataform#readme",
   "devDependencies": {
-    "webpack": "^4.28.4",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }
 }
