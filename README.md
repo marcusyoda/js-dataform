@@ -1,7 +1,11 @@
 # js-dataform
 Adds javascript support to compose object by deep form structure. The method dataform() uses javascript to serializes a form into a JavaScript Object. With this library you can also specific types to mutate data, appending the type with a colon.
 
-[![License](https://img.shields.io/npm/l/js-dataform.svg?style=flat)](https://github.com/maviniciuus/js-dataform/blob/master/LICENSE)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/maviniciuus/js-dataform)
+[![](https://img.shields.io/github/languages/code-size/badges/shields.svg)](https://github.com/maviniciuus/js-dataform) 
+[![](https://img.shields.io/github/last-commit/google/skia.svg)](https://github.com/maviniciuus/js-dataform) 
+![GitHub Repo stars](https://img.shields.io/github/stars/maviniciuus/js-dataform)
+![GitHub issues](https://img.shields.io/github/issues/maviniciuus/js-dataform)
 
 
 ## WHO SHOULD USE:
